@@ -1,0 +1,16 @@
+mutation addMake(
+  $id: ID!
+  $name: String
+  #Boolean, Float, Int
+) {
+  addMake(
+    input:{
+      name:$name
+    })
+  {
+    id
+    updatedAt
+  }
+}
+
+

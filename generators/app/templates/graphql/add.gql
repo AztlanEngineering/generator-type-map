@@ -1,0 +1,16 @@
+# <%= pkg %> <%= version %>
+mutation add<%= name %>(
+  $name: String
+  #Boolean, Float, Int
+) {
+  add<%= name %>(
+    input:{
+      name:$name
+    })
+  {
+    id
+    updatedAt
+  }
+}
+
+

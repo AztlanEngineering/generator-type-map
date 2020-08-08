@@ -1,0 +1,10 @@
+# <%= pkg %> <%= version %>
+query {
+  all<%= plural %> {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+

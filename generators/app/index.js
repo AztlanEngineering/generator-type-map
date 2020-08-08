@@ -20,21 +20,7 @@ module.exports = class extends Generator {
 
     // This makes `appname` a required argument.
     this.argument('name', { type: String, required: true })
-    this.option('common', { 
-      type: String, 
-      alias: 'c',
-      desc:'whether this component is a "common" component, meaning a sub component of another component. It will be generated in the current folder'
-    })
-    this.option('simple', { 
-      type: Boolean, 
-      alias: 's',
-      desc:'Whether to use the simple template'
-    })
-    this.option('withcommon', { 
-      type: Boolean, 
-      alias: 'w',
-      desc:'Whether to create the common directory on execution (if this component will have subcomponents)'
-    })
+      /*
     this.option('withquery', { 
       type: String, 
       alias: 'q',
@@ -43,31 +29,12 @@ module.exports = class extends Generator {
     this.option('module', { 
       type: Boolean, 
       alias: 'm',
-      desc:'Whether this is a site module (not a component)'
+      desc:'Whether this executes in this way'
     })
-    this.option('page', { 
-      type: Boolean, 
-      alias: 'p',
-      desc:'Whether this is a site page'
-    })
-    this.option('messages', { 
-      type: Boolean, 
-      alias: 'z',
-      desc:'Create component messages. THis does not create a component and should be executed separetely'
-    })
+      */
     
 
-    // And you can then access it later; e.g.
-    if (!this.options.module) {
-      this.log('Name', this.options.name)
-      this.log('Is a common component ?', !!this.options.common)
-      this.options.common ?
-        this.log('Common for', this.options.common) :
-        this.log('Create common dir ?', !!this.options.withcommon)
-    }
-    else {
-      this.log('We are creating module ', this.options.name)
-    }
+    this.log(`Will now create the queries and the map file for ${this.options.name}`)
   }
 
   /*prompting() {
@@ -113,6 +80,76 @@ module.exports = class extends Generator {
 
   }
 
+  _generateMapAndQueries() {
+    this.log('MODE : GENERATE MAP AND QUERIES')
+
+    const { name } = this.options
+
+    
+    const plural = name + 's'
+    const targetFolder = './' + name  +'/'
+    const lower = name.toLowerCase()
+    const lowerPlural = lower + 's'
+    const upper = name.toUpperCase()
+
+    mkdirp.sync(name)
+
+    this.destinationRoot(targetFolder)
+
+    mkdirp.sync('graphql')
+
+    const templateVars = {
+      pkg,
+      version,
+      name,
+      plural,
+      lower,
+      lowerPlural,
+      upper,
+    }
+
+    this.fs.copyTpl(
+      this.templatePath('index.js'),
+      this.destinationPath('index.js'),
+       templateVars
+    )
+
+    this.fs.copyTpl(
+      this.templatePath('map.js'),
+      this.destinationPath('map.js'),
+       templateVars
+    )
+
+    this.fs.copyTpl(
+      this.templatePath('graphql/all.gql'),
+      this.destinationPath(`graphql/all${plural}.gql`),
+       templateVars
+    )
+    this.fs.copyTpl(
+      this.templatePath('graphql/get.gql'),
+      this.destinationPath(`graphql/get${name}.gql`),
+       templateVars
+    )
+    this.fs.copyTpl(
+      this.templatePath('graphql/add.gql'),
+      this.destinationPath(`graphql/add${name}.gql`),
+       templateVars
+    )
+    this.fs.copyTpl(
+      this.templatePath('graphql/update.gql'),
+      this.destinationPath(`graphql/update${name}.gql`),
+       templateVars
+    )
+
+    this.fs.copyTpl(
+      this.templatePath('graphql/delete.gql'),
+      this.destinationPath(`graphql/delete${name}.gql`),
+       templateVars
+    )
+
+  }
+
+  /*
   _generateModule() {
     this.log('MODE : GENERATE MODULE')
 
@@ -385,33 +422,18 @@ module.exports = class extends Generator {
       templateDict
     })
 
-  }
+  }*/
 
   writing() {
     this.log('STARTING')
 
     const {
-      common,
-      module,
-      simple,
-      page,
-      messages
+      name,
+      //common,
+      //module,
     } = this.options
 
-
-    if(!module) {
-      if (messages) this._generateMessages()
-      else if (page) this._generatePage()
-      else if (!common) {
-        if(simple) this._generateSimpleComponent()
-        else this._generateComponent()
-      }
-      else this._generateCommonComponent()
-    } else {
-      this._generateModule()
-    }
-
-
+    this._generateMapAndQueries()
   }
 
   install() {

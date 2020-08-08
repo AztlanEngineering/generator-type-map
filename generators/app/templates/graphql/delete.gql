@@ -1,0 +1,5 @@
+# <%= pkg %> <%= version %>
+mutation delete<%= name %>($id:ID!) {
+  delete<%= name %>(id:$id)
+}
+
