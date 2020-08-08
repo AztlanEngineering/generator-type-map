@@ -1,8 +1,8 @@
 {
-  "name": "@fwrlines/generator-react-component",
-  "version": "2.4.1",
-  "description": "Creates a component for react 16.8 with a custom name and a scss file. To be used with @fwrlines/scss",
-  "homepage": "https://github.com/fwrlines/generator-react-component",
+  "name": "@fwrlines/generator-type-map",
+  "version": "1.0.0",
+  "description": "Creates a dataMap for the control panel",
+  "homepage": "https://github.com/fwrlines/generator-type-map",
   "author": {
     "name": "fwrlines",
     "email": "800@779.mx",
