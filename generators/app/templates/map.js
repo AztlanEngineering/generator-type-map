@@ -35,6 +35,7 @@ export default {
         {
           Header  :'isActive',
           accessor:'isActive',
+          sortType:'basic',
           Cell    :(v) => (<DotInfo
             boolean={v.value}
             trueClassName="y-warning"
