@@ -131,6 +131,11 @@ module.exports = class extends Generator {
        templateVars
     )
     this.fs.copyTpl(
+      this.templatePath('graphql/get.gql'),
+      this.destinationPath(`graphql/get${name}.associations.gql`),
+       templateVars
+    )
+    this.fs.copyTpl(
       this.templatePath('graphql/add.gql'),
       this.destinationPath(`graphql/add${name}.gql`),
        templateVars
