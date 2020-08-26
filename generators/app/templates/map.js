@@ -8,6 +8,7 @@ import {
 
 import QUERY_ALL from './graphql/all<%= plural %>.gql'
 import QUERY_ONE from './graphql/get<%= name%>.gql'
+//import QUERY_ONE_ASSOCIATIONS from './graphql/get<%= name %>.associations.gql'
 import MUTATION_ADD from './graphql/add<%= name %>.gql'
 import MUTATION_UPDATE from './graphql/update<%= name %>.gql'
 import MUTATION_DELETE from './graphql/delete<%= name %>.gql'
@@ -91,10 +92,32 @@ This fruit tastes
 
     }
   },
+  
+  /*
+ associations:{
+   belongsTo:[
+     {
+       as        :'accessorForGraphQLObject',
+       to        :'OtherModel.__typename',
+       foreignKey:'columnKey'
+     }
+   ],
+   hasMany:[
+     {
+       as        :'accessorForArrayOfGraphQLObjects',
+       from      :'OtherModel.__typename',
+       foreignKey:'columnKey in OtherModel'
+     }
+   ]
+
+ },*/
+
   graphql:{
     queries:{
       ALL:QUERY_ALL,
-      ONE:QUERY_ONE
+      ONE:QUERY_ONE,
+      //ONE_ASSOCIATIONS:QUERY_ONE_ASSOCIATIONS
+
     },
     mutations:{
       ADD   :MUTATION_ADD,
