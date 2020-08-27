@@ -87,7 +87,12 @@ This fruit tastes
           inputId :'isActive',
           type    :'checkbox',
           optional:true
-        }
+        },
+        {
+          label  :'userId',
+          name   :'userId',
+          inputId:'userId'
+	}
       ]
 
     }
