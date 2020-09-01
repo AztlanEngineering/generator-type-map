@@ -2,7 +2,7 @@
 import * as React from 'react'
 
 import {
-  MapObjectCars as Card,
+  MapObjectCard as Card,
   DotInfo
 } from '@fwrlines/ds'
 
