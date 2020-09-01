@@ -2,7 +2,7 @@
 import * as React from 'react'
 
 import {
-  Card,
+  MapObjectCars as Card,
   DotInfo
 } from '@fwrlines/ds'
 
@@ -48,7 +48,10 @@ export default {
     },
     card:{
       Component:({ item, ...props }) => (
-        <Card {...props}>
+        <Card 
+	item={item}
+	{...props}
+	>
           <Card.Section>
             <p className="h2">{ item.name }</p>
           </Card.Section>
