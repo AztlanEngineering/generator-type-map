@@ -24,6 +24,13 @@ export default {
   baseUrl     :'<%= lowerPlural %>',
   defaultViews:{
     table:{
+      initialState:{
+        hiddenColumns:[
+          'fullId',
+          'createdAt',
+          'updatedAt'
+        ]
+      },
       columns:[
         {
           Header  :'id',
