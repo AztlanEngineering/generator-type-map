@@ -59,6 +59,19 @@ export default {
             falseClassName="y-transparent"
           />)
         },
+        {
+          Header  :'createdAt',
+          accessor:'createdAt',
+          Cell    :(v) =>
+            <Timestamp time={new Date(v.value)} />
+        },
+        {
+          Header  :'updatedAt',
+          accessor:'updatedAt',
+          Cell    :(v) =>
+            <Timestamp time={new Date(v.value)} />
+            //<Timestamp time={ v.value }/>
+        }
       ]
 
     },
