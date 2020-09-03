@@ -37,6 +37,15 @@ export default {
           accessor:'id'
         },
         {
+          Header  :'fullId',
+          accessor:'id',
+          id      :'fullId',
+          Cell    :(v) =>
+            (<span className="f-mono">
+              { v.value }
+            </span>)
+        },
+        {
           Header  :'name',
           accessor:'name'
         },
