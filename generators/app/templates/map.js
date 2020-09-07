@@ -8,6 +8,7 @@ import {
 
 import QUERY_ALL from './graphql/all<%= plural %>.gql'
 import QUERY_ONE from './graphql/get<%= name%>.gql'
+//import QUERY_FULL from './graphql/get<%= name%>.full.gql'
 //import QUERY_ONE_ASSOCIATIONS from './graphql/get<%= name %>.associations.gql'
 import MUTATION_ADD from './graphql/add<%= name %>.gql'
 import MUTATION_UPDATE from './graphql/update<%= name %>.gql'
@@ -126,6 +127,20 @@ This fruit tastes
   },
   
   /*
+ actions:{
+    extraActions:[
+      {
+        condition:(user) => true,
+        Component:({ item }) =>
+          item.url ? <a
+            href={item.fullPath}
+            target="_blank"
+                     >
+            <Button className="x-azure">Open</Button>
+          </a> : null
+      }
+    ]
+  },
  associations:{
    belongsTo:[
      {
@@ -147,7 +162,8 @@ This fruit tastes
   graphql:{
     queries:{
       ALL:QUERY_ALL,
-      ONE:QUERY_ONE,
+      ONE :QUERY_ONE,
+      //FULL:QUERY_FULL,
       //ONE_ASSOCIATIONS:QUERY_ONE_ASSOCIATIONS
 
     },
