@@ -23,6 +23,7 @@ export default {
   urlKey      :'<%= upper %>',
   // Used to catch the relevant urls in the mapper
   baseUrl     :'<%= lowerPlural %>',
+  //orderField:'order',
   defaultViews:{
     table:{
       initialState:{
