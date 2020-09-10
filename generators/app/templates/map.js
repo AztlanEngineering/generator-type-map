@@ -1,20 +1,20 @@
 /* <%= pkg %> <%= version %> */
 import * as React from 'react'
 
-import {
-  Heading,
-  MapObjectCard as Card,
-  DotInfo
-} from '@fwrlines/ds'
-
-import QUERY_ALL from './graphql/all<%= plural %>.gql'
 import QUERY_ONE from './graphql/get<%= name%>.gql'
+import QUERY_ALL from './graphql/all<%= plural %>.gql'
 //import QUERY_FULL from './graphql/get<%= name%>.full.gql'
 //import QUERY_ONE_ASSOCIATIONS from './graphql/get<%= name %>.associations.gql'
 //import QUERY_ASSOCIATIONS_ALL_USERS from './graphql/associations.allUsers.gql'
 import MUTATION_ADD from './graphql/add<%= name %>.gql'
 import MUTATION_UPDATE from './graphql/update<%= name %>.gql'
 import MUTATION_DELETE from './graphql/delete<%= name %>.gql'
+
+import {
+  DotInfo,
+  Heading,
+  MapObjectCard as Card,
+} from '@fwrlines/ds'
 
 export default {
   // This will display at the top. In the future we should include this as a menu title
