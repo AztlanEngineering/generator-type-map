@@ -3,12 +3,13 @@ import * as React from 'react'
 
 import {
   Heading,
-  Card,
+  MapObjectCard as Card,
   DotInfo
 } from '@fwrlines/ds'
 
 import QUERY_ALL from './graphql/all<%= plural %>.gql'
 import QUERY_ONE from './graphql/get<%= name%>.gql'
+//import QUERY_FULL from './graphql/get<%= name%>.full.gql'
 //import QUERY_ONE_ASSOCIATIONS from './graphql/get<%= name %>.associations.gql'
 //import QUERY_ASSOCIATIONS_ALL_USERS from './graphql/associations.allUsers.gql'
 import MUTATION_ADD from './graphql/add<%= name %>.gql'
@@ -24,12 +25,29 @@ export default {
   urlKey      :'<%= upper %>',
   // Used to catch the relevant urls in the mapper
   baseUrl     :'<%= lowerPlural %>',
+  //orderField:'order',
   defaultViews:{
     table:{
+      initialState:{
+        hiddenColumns:[
+          'fullId',
+          'createdAt',
+          'updatedAt'
+        ]
+      },
       columns:[
         {
           Header  :'id',
           accessor:'id'
+        },
+        {
+          Header  :'fullId',
+          accessor:'id',
+          id      :'fullId',
+          Cell    :(v) =>
+            (<span className="f-mono">
+              { v.value }
+            </span>)
         },
         {
           Header  :'name',
@@ -45,12 +63,28 @@ export default {
             falseClassName="y-transparent"
           />)
         },
+        {
+          Header  :'createdAt',
+          accessor:'createdAt',
+          Cell    :(v) =>
+            <Timestamp time={new Date(v.value)} />
+        },
+        {
+          Header  :'updatedAt',
+          accessor:'updatedAt',
+          Cell    :(v) =>
+            <Timestamp time={new Date(v.value)} />
+            //<Timestamp time={ v.value }/>
+        }
       ]
 
     },
     card:{
       Component:({ item, ...props }) => (
-        <Card {...props}>
+        <Card 
+	item={item}
+	{...props}
+	>
           <Card.Section>
             <p className="h2">{ item.name }</p>
           </Card.Section>
@@ -116,6 +150,20 @@ This fruit tastes
   },
   
   /*
+ actions:{
+    extraActions:[
+      {
+        condition:(user) => true,
+        Component:({ item }) =>
+          item.url ? <a
+            href={item.fullPath}
+            target="_blank"
+                     >
+            <Button className="x-azure">Open</Button>
+          </a> : null
+      }
+    ]
+  },
  associations:{
    belongsTo:[
      {
@@ -137,7 +185,8 @@ This fruit tastes
   graphql:{
     queries:{
       ALL:QUERY_ALL,
-      ONE:QUERY_ONE,
+      ONE :QUERY_ONE,
+      //FULL:QUERY_FULL,
       //ONE_ASSOCIATIONS:QUERY_ONE_ASSOCIATIONS
 
     },
