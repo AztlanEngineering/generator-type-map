@@ -2,6 +2,7 @@
 import * as React from 'react'
 
 import {
+  Heading,
   MapObjectCard as Card,
   DotInfo
 } from '@fwrlines/ds'
@@ -10,6 +11,7 @@ import QUERY_ALL from './graphql/all<%= plural %>.gql'
 import QUERY_ONE from './graphql/get<%= name%>.gql'
 //import QUERY_FULL from './graphql/get<%= name%>.full.gql'
 //import QUERY_ONE_ASSOCIATIONS from './graphql/get<%= name %>.associations.gql'
+//import QUERY_ASSOCIATIONS_ALL_USERS from './graphql/associations.allUsers.gql'
 import MUTATION_ADD from './graphql/add<%= name %>.gql'
 import MUTATION_UPDATE from './graphql/update<%= name %>.gql'
 import MUTATION_DELETE from './graphql/delete<%= name %>.gql'
@@ -121,7 +123,27 @@ This fruit tastes
           inputId :'isActive',
           type    :'checkbox',
           optional:true
-        }
+        },/*
+        {
+          label      :'userId',
+          name       :'userId',
+          inputId    :'userId',
+          type       :'query-downshift-combobox',
+          query      :QUERY_ASSOCIATIONS_ALL_USERS,
+          displayItem:(item) => (
+            <Heading
+              heading={item.name} //site name
+              subtitle={item.id}
+            />
+          ),
+          filterItems:((items, value) => items.filter(e => [
+            e.id,
+            e.email,
+            e.username,
+            e.firstName,
+            e.lastName
+          ].filter(e => e).join(' ').match(new RegExp( value, 'gi') )))
+        }*/
       ]
 
     }
