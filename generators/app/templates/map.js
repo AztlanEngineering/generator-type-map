@@ -37,44 +37,66 @@ export default {
       },
       columns:[
         {
-          Header  :'id',
-          accessor:'id'
-        },
-        {
-          Header  :'fullId',
-          accessor:'id',
-          id      :'fullId',
-          Cell    :(v) =>
-            (<span className="f-mono">
-              { v.value }
+          Header :'guid',
+          columns:[
+            {
+       	      Header  :'id',
+              accessor:'id'
+            },
+            {
+              Header  :'fullId',
+              accessor:'id',
+              id      :'fullId',
+              Cell    :(v) =>
+                (<span className="f-mono">
+                { v.value }
             </span>)
+            }
+          ]
         },
         {
-          Header  :'name',
-          accessor:'name'
+          Header :'fields',
+          columns:[
+            {
+              Header  :'name',
+              accessor:'name'
+            },
+            {
+              Header  :'isActive',
+              accessor:'isActive',
+              sortType:'basic',
+              Cell    :(v) => (<DotInfo
+                boolean={v.value}
+                trueClassName="y-warning"
+                falseClassName="y-transparent"
+              />)
+            }
+          ]
         },
-        {
-          Header  :'isActive',
-          accessor:'isActive',
-          sortType:'basic',
-          Cell    :(v) => (<DotInfo
-            boolean={v.value}
-            trueClassName="y-warning"
-            falseClassName="y-transparent"
-          />)
-        },
-        {
-          Header  :'createdAt',
-          accessor:'createdAt',
-          Cell    :(v) =>
-            <Timestamp time={new Date(v.value)} />
-        },
-        {
-          Header  :'updatedAt',
-          accessor:'updatedAt',
-          Cell    :(v) =>
-            <Timestamp time={new Date(v.value)} />
-            //<Timestamp time={ v.value }/>
+	{
+          Header :'associations',
+          columns:[
+            {
+            }
+          ]
+	},
+	{
+          Header :'timestamps',
+          columns:[
+            {
+              Header  :'createdAt',
+              accessor:'createdAt',
+              Cell    :(v) =>
+                <Timestamp time={new Date(v.value)} />
+            },
+            {
+              Header  :'updatedAt',
+              accessor:'updatedAt',
+              Cell    :(v) =>
+                <Timestamp time={new Date(v.value)} />
+                //<Timestamp time={ v.value }/>
+            }
+          ]
         }
       ]
 
