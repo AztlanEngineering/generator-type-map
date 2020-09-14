@@ -5,7 +5,7 @@ import QUERY_ONE from './graphql/get<%= name%>.gql'
 import QUERY_ALL from './graphql/all<%= plural %>.gql'
 //import QUERY_FULL from './graphql/get<%= name%>.full.gql'
 //import QUERY_ONE_ASSOCIATIONS from './graphql/get<%= name %>.associations.gql'
-//import QUERY_ASSOCIATIONS_ALL_USERS from './graphql/associations.allUsers.gql'
+//import QUERY_ASSOCIATIONS_ALL_SITES from './graphql/associations.allSites.gql'
 import MUTATION_ADD from './graphql/add<%= name %>.gql'
 import MUTATION_UPDATE from './graphql/update<%= name %>.gql'
 import MUTATION_DELETE from './graphql/delete<%= name %>.gql'
@@ -14,6 +14,7 @@ import {
   DotInfo,
   Heading,
   MapObjectCard as Card,
+  MapTypeButton as TypeButton
 } from '@fwrlines/ds'
 
 export default {
@@ -37,44 +38,92 @@ export default {
       },
       columns:[
         {
-          Header  :'id',
-          accessor:'id'
-        },
-        {
-          Header  :'fullId',
-          accessor:'id',
-          id      :'fullId',
-          Cell    :(v) =>
-            (<span className="f-mono">
-              { v.value }
+          Header :'guid',
+          columns:[
+            {
+       	      Header  :'id',
+              accessor:'id'
+            },
+            {
+              Header  :'fullId',
+              accessor:'id',
+              id      :'fullId',
+              Cell    :(v) =>
+                (<span className="f-mono">
+                { v.value }
             </span>)
+            }
+          ]
         },
         {
-          Header  :'name',
-          accessor:'name'
-        },
-        {
-          Header  :'isActive',
-          accessor:'isActive',
-          sortType:'basic',
-          Cell    :(v) => (<DotInfo
-            boolean={v.value}
-            trueClassName="y-warning"
-            falseClassName="y-transparent"
-          />)
-        },
-        {
-          Header  :'createdAt',
-          accessor:'createdAt',
-          Cell    :(v) =>
-            <Timestamp time={new Date(v.value)} />
-        },
-        {
-          Header  :'updatedAt',
-          accessor:'updatedAt',
-          Cell    :(v) =>
-            <Timestamp time={new Date(v.value)} />
-            //<Timestamp time={ v.value }/>
+          Header :'fields',
+          columns:[
+            {
+              Header  :'name',
+              accessor:'name'
+            },
+            {
+              Header  :'isActive',
+              accessor:'isActive',
+              sortType:'basic',
+              Cell    :(v) => (<DotInfo
+                boolean={v.value}
+                trueClassName="y-warning"
+                falseClassName="y-transparent"
+              />)
+            }
+          ]
+        },/*
+	{
+          Header :'associations',
+          columns:[
+            {
+              Header  :'siteId',
+              accessor:'siteId',
+              Cell    :(v) =>
+                (<span className="f-mono">
+                  { v.value }
+                </span>)
+            },
+            {
+              Header  :'website',
+              accessor:'website',
+              sortType:(rowA, rowB) => {
+                const a = rowA.original.siteId
+                const b = rowB.original.siteId
+                
+                if (!a && !b) return 0
+                if (!a && b) return 1
+                if (!b && a) return -1
+                if (a < b) return -1
+                return 1
+
+              },
+              Cell:(v) => v.value ? <TypeButton
+                className="s-2 k-s"
+                typename="Site"
+                item={v.value}
+                                    />: ''
+            }
+          ]
+	},*/
+	{
+          Header :'timestamps',
+          columns:[
+            {
+              Header  :'createdAt',
+              accessor:'createdAt',
+              Cell    :(v) =>
+                <Timestamp time={new Date(v.value)} />
+            },
+            {
+              Header  :'updatedAt',
+              accessor:'updatedAt',
+              Cell    :(v) =>
+                <Timestamp time={new Date(v.value)} />
+                //<Timestamp time={ v.value }/>
+            }
+          ]
         }
       ]
 
@@ -125,11 +174,11 @@ This fruit tastes
           optional:true
         },/*
         {
-          label      :'userId',
-          name       :'userId',
-          inputId    :'userId',
+          label      :'siteId',
+          name       :'siteId',
+          inputId    :'siteId',
           type       :'query-downshift-combobox',
-          query      :QUERY_ASSOCIATIONS_ALL_USERS,
+          query      :QUERY_ASSOCIATIONS_ALL_SITES,
           displayItem:(item) => (
             <Heading
               heading={item.name} //site name
@@ -138,10 +187,7 @@ This fruit tastes
           ),
           filterItems:((items, value) => items.filter(e => [
             e.id,
-            e.email,
-            e.username,
-            e.firstName,
-            e.lastName
+	    e.name
           ].filter(e => e).join(' ').match(new RegExp( value, 'gi') )))
         }*/
       ]
