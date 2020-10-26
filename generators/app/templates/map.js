@@ -205,7 +205,7 @@ This fruit tastes
             href={item.fullPath}
             target="_blank"
                      >
-            <Button className="x-azure">Open</Button>
+            <Button compact className="x-azure">Open</Button>
           </a> : null
       }
     ]
