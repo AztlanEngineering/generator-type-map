@@ -1,6 +1,6 @@
 {
   "name": "@fwrlines/generator-type-map",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Creates a dataMap for the control panel",
   "homepage": "https://github.com/fwrlines/generator-type-map",
   "author": {
