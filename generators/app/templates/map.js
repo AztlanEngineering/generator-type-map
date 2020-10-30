@@ -17,6 +17,12 @@ import {
   MapTypeButton as TypeButton
 } from '@fwrlines/ds'
 
+import {
+  dateFormat,
+  distanceTimestampFormat,
+  relativeTimestampFormat
+} from 'config/time'
+
 export default {
   // This will display at the top. In the future we should include this as a menu title
   name        :'<%= plural %>',
@@ -111,16 +117,23 @@ export default {
           Header :'timestamps',
           columns:[
             {
-              Header  :'createdAt',
-              accessor:'createdAt',
-              Cell    :(v) =>
-                <Timestamp time={v.value} />
-            },
-            {
               Header  :'updatedAt',
               accessor:'updatedAt',
               Cell    :(v) =>
-                <Timestamp time={v.value} />
+                (<Timestamp
+                  time={v.value}
+                  {...distanceTimestampFormat}
+                />)
+                //<Timestamp time={ v.value }/>
+            },
+            {
+              Header  :'lastUpdatedAt',
+              accessor:'lastUpdatedAt',
+              Cell    :(v) =>
+                (<Timestamp
+                  time={v.value}
+                  {...distanceTimestampFormat}
+                />)
                 //<Timestamp time={ v.value }/>
             }
           ]
@@ -172,8 +185,8 @@ This fruit tastes
           inputId :'isActive',
           type    :'checkbox',
           optional:true
-        },/*
-        {
+        },
+        {/*
           label      :'imageId',
           name       :'imageId',
           inputId    :'imageId',
@@ -187,6 +200,7 @@ This fruit tastes
                 <>
                   <span>{ item.id }</span>
                   <span className="x-green c-x">
+                    {//<span className="fi">k</span>&nbsp;}
                     <Timestamp
                       as='strong'
                       time={item.updatedAt}
@@ -194,13 +208,13 @@ This fruit tastes
                     />
                   </span>
                 </>
-        
               }
               subtitleStyle={{
                 display       :'flex',
                 justifyContent:'space-between'
               }}
             >
+              //<span className="s-1 x-subtitle c-light-x">{ item.id }</span>
             </Heading>
           ),
           filterItems:((items, value) => items.filter(e => [
@@ -208,7 +222,7 @@ This fruit tastes
             alt,
             caption
           ].filter(e => e).join(' ').match(new RegExp( value, 'gi') )))
-        },*/
+      */}
       ]
 
     }
