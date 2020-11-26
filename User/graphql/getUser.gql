@@ -1,9 +1,0 @@
-query getMake($id:ID!) {
-  getMake(id:$id) {
-    _string
-    id
-    name
-    createdAt
-    updatedAt
-  }
-}
