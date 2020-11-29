@@ -1,9 +1,0 @@
-query {
-  allMakes {
-    id
-    name
-    createdAt
-    updatedAt
-  }
-}
-

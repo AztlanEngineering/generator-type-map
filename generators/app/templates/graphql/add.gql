@@ -1,13 +1,6 @@
 # <%= pkg %> <%= version %>
-mutation add<%= name %>(
-  $name: String
-  #Boolean, Float, Int
-) {
-  add<%= name %>(
-    input:{
-      name:$name
-    })
-  {
+mutation add<%= name %>($input:<%= name %>Input!) {
+  add<%= name %>(input:$input) {
     id
     updatedAt
   }

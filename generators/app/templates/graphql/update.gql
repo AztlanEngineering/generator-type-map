@@ -1,14 +1,11 @@
 # <%= pkg %> <%= version %>
 mutation update<%= name %>(
   $id: ID!
-  $name: String
-  #Boolean, Float, Int
+  $input: <%= name %>Input!
 ) {
   update<%= name %>(
     id:$id
-    input:{
-      name:$name
-    })
+    input:$input)
   {
     id
     updatedAt
